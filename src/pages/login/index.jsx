@@ -7,7 +7,7 @@ import { getCodeAction } from '../../store/modules/userInfo'
 
 const index = memo(() => {
 
-  const [verifyFlag, setVerifyFlag] = useState(true)
+  const [verifyFlag, setVerifyFlag] = useState(false)
 
   const dispatch = useDispatch()
   useEffect(() => {

@@ -1,5 +1,6 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import storage from "../../util/storage";
+import { encryption } from "../../util/encryption";
 import * as loginApi from '../../api/modules/login/index'
 
 
@@ -8,6 +9,18 @@ const getCodeAction = createAsyncThunk('fetch/getCode',async (extraInfo, { dispa
   const res = await loginApi.getCode()
   dispatch(setCodeInfo(res.data.data))
 })
+const loginByUsername = createAsyncThunk('fetch/getCode',async (extraInfo, { dispatch, getState }) => {
+  console.log('extraInfo', extraInfo);
+  const user = encryption({
+    data: extraInfo,
+    key: 'pigxpigxpigxpigx',
+    param: ['password']
+  })
+  console.log('user', user);
+  const res = await loginApi.loginByUsername(user.username, user.password, user.code, user.randomStr,user.w1)
+  console.log('res', res);
+})
+
 
 
 const userSlice = createSlice({
@@ -30,6 +43,6 @@ const userSlice = createSlice({
   }
 })
 
-export { getCodeAction }
+export { getCodeAction, loginByUsername }
 export const { saveTenantId, logOut, setCodeInfo } = userSlice.actions
 export default userSlice.reducer

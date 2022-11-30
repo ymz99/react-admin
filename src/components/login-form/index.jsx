@@ -1,7 +1,10 @@
-import React, { memo, useState } from 'react'
+import React, { memo, useEffect, useState } from 'react'
+import { useDispatch } from 'react-redux'
 import Form from './style'
+import { loginByUsername } from '../../store/modules/userInfo.js'
 import SvgIcon from '@/components/svgIcon/index.jsx'
 import classNames from 'classnames'
+import eventBus from '../../event'
 
 const index = memo((props) => {
 
@@ -15,6 +18,24 @@ const index = memo((props) => {
       [e.target.name]: e.target.value
     })
   } 
+  const dispatch = useDispatch()
+  useEffect(() => {
+    const addFun = (captchaVerification) => {
+      const form = {
+        code: captchaVerification,
+        w1: formData.password,
+        randomStr: 'blockPuzzle',
+        password:formData.password,
+        username: formData.name
+      }
+      dispatch(loginByUsername(form))
+    }
+    eventBus.addListener('verifySuccess', addFun)
+
+    return () => {
+      eventBus.removeListener('verifySuccess', addFun)
+    }
+  }, [dispatch, formData])
 
   const [passWordIcon, setPassWordIcon] = useState('eye')
   const changIcon = () => { passWordIcon === 'eye' ?  setPassWordIcon('eye-close') : setPassWordIcon('eye') }
