@@ -28,7 +28,6 @@ instance.interceptors.request.use(config => {
   const TENANT_ID = stroage.getStore({ name: 'tenantId' })
   const isToken = (config.headers || {}).isToken === false
   const token = store.getState().userInfo.access_token
-  config.headers['Content-Type'] = 'application/json; charset=UTF-8'
   if(token && !isToken) {
     config.headers['Authorization'] = 'Bearer ' + token
   }
