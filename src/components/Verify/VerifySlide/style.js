@@ -1,10 +1,9 @@
 import styled from 'styled-components'
 
-const VerifySlideWrapper = styled.div.attrs(props => ({
-  
-}))`
+const VerifySlideWrapper = styled.div`
   .verify-img-out{
-    height: 160px;
+    height: 155px;
+    margin-bottom: 5px;
     position: relative;
     transition: all .3s ease;
 
@@ -39,19 +38,33 @@ const VerifySlideWrapper = styled.div.attrs(props => ({
     .verify-status {
       width: 330px;
       position: absolute;
-      bottom: 4px;
+      bottom: 0;
       font-size: 12px;
       color: #fff;
       height: 20px;
       line-height: 20px;
     }
+
+    .status-enter {
+      bottom: -20px;
+    }
+    .status-enter-active {
+      bottom: 0;
+      transition: bottom .8s ease;
+    }
+    .status-exit {
+      bottom: 0;
+    }
+    .status-exit-active {
+      bottom: -20px;
+      transition: bottom .8s ease;
+    }
+
     .verify-status.success {
       background-color:rgba(92, 184, 92,.5);  
-       filter: progid:DXImageTransform.Microsoft.gradient(startcolorstr=#7f5CB85C, endcolorstr=#7f5CB85C);
     }
     .verify-status.fail {
       background-color:rgba(217, 83, 79,.5);  
-      filter: progid:DXImageTransform.Microsoft.gradient(startcolorstr=#7fD9534F, endcolorstr=#7fD9534F);
     }
   }
 
@@ -92,8 +105,9 @@ const VerifySlideWrapper = styled.div.attrs(props => ({
   }
   .left-transition {
     transition-property: width, left;
-    transition-duration: .5s;
+    transition-duration: .8s;
     transition-timing-function: ease;
   }
 `
+
 export default VerifySlideWrapper

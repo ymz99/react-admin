@@ -1,5 +1,6 @@
 import styled from 'styled-components'
 
+
 export  const Wrapper = styled.div`
   display: flex;
   align-items: center;
@@ -52,3 +53,20 @@ export  const Wrapper = styled.div`
   }
 `
 
+
+export const TransitionWrapper = styled.div`
+  .verify-transition-enter {
+    opacity: 0;
+  }
+  .verify-transition-enter-active {
+    opacity: 1;
+    transition: opacity 0.8s ease;
+  }
+  .verify-transition-exit {
+    opacity: 1;
+  }
+  .verify-transition-exit-active {
+    opacity: 0;
+    transition: opacity 0.8s ease;
+  }
+`

@@ -1,5 +1,6 @@
 import React, { memo, useRef, useState } from 'react'
 import { useSelector, shallowEqual, useDispatch } from 'react-redux'
+import { CSSTransition } from 'react-transition-group'
 import classNames from 'classnames'
 import VerifySlideWrapper from './style.js'
 import { RightOutlined } from '@ant-design/icons'
@@ -61,14 +62,12 @@ const index = memo(() => {
       token: codeInfo.repData.token
     }
     const res = await reqCheck(data)
-    console.log('res', res);
     if(res.data.data.repCode === '0000') {
       setVerifyStatus({
         show: true,
         success: true
       })
       const captchaVerification = codeInfo.repData.secretKey ? aesEncrypt(codeInfo.repData.token + '---' + JSON.stringify({x:distance,y:5.0}),codeInfo.repData.secretKey) : data.token + '---' +  JSON.stringify({x: distance,y: 5.0})
-      console.log(captchaVerification);
       eventBus.emit('verifySuccess', captchaVerification)
     }else {
       setVerifyStatus({
@@ -81,13 +80,11 @@ const index = memo(() => {
           show: false,
           success: false
         })
-  
         dispatch(getCodeAction())
         setLeft(0)
-      }, 1000);
+      }, 800);
     }
   }
-
   return (
     <VerifySlideWrapper>
       <div className='verify-img-out'>
@@ -102,10 +99,11 @@ const index = memo(() => {
         <div className='refresh' onClick={e => refreshClick() }>
           <ReloadOutlined />
         </div>
-        <div className={classNames('verify-status', verifyStatus.success ? 'success' : 'fail')} style={{display: verifyStatus.show ? 'block' : 'none'}}>
+      <CSSTransition in={verifyStatus.show} unmountOnExit={true} classNames='status' timeout={800} >
+        <div className={classNames('verify-status', verifyStatus.success ? 'success' : 'fail')}>
           {verifyStatus.success ? '验证成功' : '验证失败'}
         </div>
-
+      </CSSTransition>
       </div>
       <div className='verify-bar-area' ref={areaRef}>
         <div className={classNames('verify-left-bg', {'left-transition': fileTransition })}   style={{
@@ -121,7 +119,6 @@ const index = memo(() => {
          </div>
         </div>
       </div>
-
     </VerifySlideWrapper>
   )
 })
