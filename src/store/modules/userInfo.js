@@ -10,15 +10,13 @@ const getCodeAction = createAsyncThunk('fetch/getCode',async (extraInfo, { dispa
   dispatch(setCodeInfo(res.data.data))
 })
 const loginByUsername = createAsyncThunk('fetch/getCode',async (extraInfo, { dispatch, getState }) => {
-  console.log('extraInfo', extraInfo);
   const user = encryption({
     data: extraInfo,
     key: 'pigxpigxpigxpigx',
     param: ['password']
   })
-  console.log('user', user);
   const res = await loginApi.loginByUsername(user.username, user.password, user.code, user.randomStr,user.w1)
-  console.log('res', res);
+  return res.data
 })
 
 
@@ -37,6 +35,7 @@ const userSlice = createSlice({
     saveTenantId(state, {payload}) {
       state.tenantId = payload
     },
+    
     logOut() {
       console.log('logout');
     } 
