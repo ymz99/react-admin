@@ -1,6 +1,7 @@
 import React, { memo, useEffect, useState } from 'react'
 import classNames from 'classnames'
 import { useDispatch } from 'react-redux'
+import { useNavigate } from 'react-router-dom'
 import { loginByUsername } from '../../store/modules/userInfo.js'
 import Form from './style'
 import SvgIcon from '@/components/svgIcon/index.jsx'
@@ -19,6 +20,7 @@ const index = memo((props) => {
     })
   } 
   const dispatch = useDispatch()
+  const navigate = useNavigate()
   useEffect(() => {
     const addFun = async (captchaVerification) => {
       const form = {
@@ -29,14 +31,15 @@ const index = memo((props) => {
         username: formData.name
       }
       const res = await dispatch(loginByUsername(form))
-      console.log('res', res);
-
+      if(res.payload) {
+        navigate('/home')
+      }
     }
     eventBus.addListener('verifySuccess', addFun)
     return () => {
       eventBus.removeListener('verifySuccess', addFun)
     }
-  }, [dispatch, formData])
+  }, [dispatch, navigate, formData])
 
   const [passWordIcon, setPassWordIcon] = useState('eye')
   const changIcon = () => { passWordIcon === 'eye' ?  setPassWordIcon('eye-close') : setPassWordIcon('eye') }
