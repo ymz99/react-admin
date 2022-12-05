@@ -24,14 +24,17 @@ module.exports = {
     },
   },
   devServer: {
+    historyApiFallback: true,
     open: false,
+    port: 4001,
     proxy: {
-      '/': {
+      '/api': {
         target: process.env.REACT_APP_URL,
-        changeOrigin:true,
+        secure: false,
+        changeOrigin: true,
         ws: false, // 需要websocket 开启
         pathRewrite: {
-          '^/': '/'
+          '^/api': '/'
         }
       }
     }
