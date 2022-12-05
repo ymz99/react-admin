@@ -1,12 +1,10 @@
 import React, { memo } from 'react'
-import { useRoutes } from 'react-router-dom';
-import router from './routes';
+// import router from './routes';
+import RouterBefore from './routes/RouterBefore';
 
 const App = memo(() => {
   return (
-    <div>
-      {useRoutes(router)}
-    </div>
+    <RouterBefore />
   )
 })
 
