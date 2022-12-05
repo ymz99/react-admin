@@ -51,10 +51,10 @@ instance.interceptors.response.use(res => {
   const status = Number(res.status) || 200
   const errMessage = res.data.msg || errorCode[status] || errorCode['default']
   if(status === 401) {
-    notification.error({
-      description: '请重新登录',
-      duration: 2,
-    })
+    // notification.error({
+    //   description: '请重新登录',
+    //   duration: 2,
+    // })
     store.dispatch(logOut());
     history.replace('/login')
   }

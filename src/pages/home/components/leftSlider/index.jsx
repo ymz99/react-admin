@@ -1,7 +1,16 @@
 import React, { memo } from 'react'
 import Left from './style'
+import { getMenuAction } from '../../../../store/modules/userInfo'
+import { useEffect } from 'react'
+import { useDispatch } from 'react-redux'
+
 
 const leftSlider = memo((props) => {
+  const dispatch = useDispatch()
+  useEffect(() => {
+    dispatch(getMenuAction())
+  }, [dispatch])
+
   const { collapsed } = props
   return (
     <Left collapsed={collapsed}>

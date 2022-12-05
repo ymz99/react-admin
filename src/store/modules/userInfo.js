@@ -2,6 +2,7 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import storage from "../../util/storage";
 import { encryption } from "../../util/encryption";
 import * as loginApi from '../../api/modules/login/index'
+import { getMenu } from "../../api/modules/menu";
 
 
 
@@ -9,6 +10,7 @@ const getCodeAction = createAsyncThunk('fetch/getCode',async (extraInfo, { dispa
   const res = await loginApi.getCode()
   dispatch(setCodeInfo(res.data.data))
 })
+
 const loginByUsername = createAsyncThunk('fetch/getCode',async (extraInfo, { dispatch, getState }) => {
   const user = encryption({
     data: extraInfo,
@@ -21,6 +23,11 @@ const loginByUsername = createAsyncThunk('fetch/getCode',async (extraInfo, { dis
   return res.data
 })
 
+const getMenuAction = createAsyncThunk('fetch/getMenu', async (extraInfo, { dispatch, getState }) => {
+  const res = await getMenu()
+  console.log('res', res);
+
+})
 
 
 const userSlice = createSlice({
@@ -77,6 +84,6 @@ const userSlice = createSlice({
   }
 })
 
-export { getCodeAction, loginByUsername }
+export { getCodeAction, loginByUsername, getMenuAction }
 export const { saveTenantId, logOut, setCodeInfo, setBaseInfo, setPermissions } = userSlice.actions
 export default userSlice.reducer
