@@ -1,21 +1,23 @@
-import { memo } from 'react'
-import { useRoutes, useLocation, useNavigate } from 'react-router-dom';
-import router from './index.js';
-import stroage from "@/util/storage";
+import { Navigate, useLocation } from "react-router-dom"
+import storage from "@/util/storage";
 
-const white = [
-  '/home'
-]
-
-const RouterBefore = memo(() => {
-  const location = useLocation();
-  const navigate = useNavigate();
-  if(white.includes(location.pathname) && !stroage.getStore({name: 'refresh_token'})) {
-    console.log('cc');
-
-    navigate('/login')
+const RouterBeforeEach = props => {
+  if(props?.route?.meta?.title) {
+    document.title = props.route.meta.title
   }
-  return useRoutes(router)
-})
-
-export default RouterBefore
+  const location = useLocation()
+  const isLogin = !!storage.getStore({name: 'access_token'})
+  if(props?.route?.meta?.isLogin) {
+    if(!isLogin) {
+      return  <Navigate replace={true} to="/login"  state={{ from: `${location.pathname}${location.search}` }} />
+    }
+  }
+  const routerKey = location.pathname 
+  if(isLogin && ['/login'].includes(routerKey)) {
+    return <Navigate to={'/'} replace/>
+  }
+  return(
+    <>{props.children}</>
+  )
+}
+export default RouterBeforeEach

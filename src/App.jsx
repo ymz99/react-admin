@@ -1,11 +1,10 @@
 import React, { memo } from 'react'
-// import router from './routes';
-import RouterBefore from './routes/RouterBefore';
+import Router from './routes/index'
+
 
 const App = memo(() => {
-  return (
-    <RouterBefore />
-  )
+
+  return <Router />
 })
 
 export default App

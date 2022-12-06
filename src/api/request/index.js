@@ -3,7 +3,7 @@ import { BASE_URL, TIMEOUT} from './config'
 import NProgress from 'nprogress'
 import 'nprogress/nprogress.css'
 import qs from 'qs'
-import stroage from "../../util/storage";
+import storage from "../../util/storage";
 import store from "../../store";
 import { logOut } from "../../store/modules/userInfo";
 import errorCode from './errorCode'
@@ -25,7 +25,7 @@ NProgress.configure({
 
 instance.interceptors.request.use(config => {
   NProgress.start()
-  const TENANT_ID = stroage.getStore({ name: 'tenantId' })
+  const TENANT_ID = storage.getStore({ name: 'tenantId' })
   const isToken = (config.headers || {}).isToken === false
   const token = store.getState().userInfo.access_token
   if(token && !isToken) {

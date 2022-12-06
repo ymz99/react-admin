@@ -3,7 +3,7 @@ import { validatenull } from "./validate";
 
 const keyName = webSite.key + '-'
 
-class Stroage {
+class storage {
 
   setStore(params = {}) {
     let { name, content, type } = params
@@ -93,4 +93,4 @@ class Stroage {
   }
 }
 
-export default new Stroage()
+export default new storage()

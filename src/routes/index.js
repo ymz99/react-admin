@@ -1,26 +1,15 @@
-import Login from '@/pages/login/index.jsx'
-import Home from '@/pages/home/index.jsx'
-import NotFound from '@/pages/404NotFound/index.jsx'
-import { Navigate } from 'react-router-dom'
+import routes from "./routes";
+import renderRoutes from './renderRoutes'
+import { useRoutes } from "react-router-dom";
+import { Suspense } from 'react'
+import Fallback from "../components/fallback/index";
 
+const Router = () => {
+  return (
+    <Suspense fallback={<Fallback />}>
+      {useRoutes(renderRoutes(routes))}
+    </Suspense>
+  )
+}
 
-const router = [
-  {
-    path: '/',
-    element: <Navigate to='/login' />
-  },
-  {
-    path: '/login',
-    element: <Login />
-  },
-  {
-    path: '/home',
-    element: <Home />
-  },
-  {
-    path: '*',
-    element: <NotFound />
-
-  }
-]
-export default router
+export default Router
