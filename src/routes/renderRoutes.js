@@ -10,6 +10,9 @@ const renderRoutes = routes => {
     if(item.component) {
       route.element = <RouterBeforeEach route={item}><item.component /></RouterBeforeEach>
     }
+    if(item.children) {
+      route.children = renderRoutes(item.children)
+    }
     if(item.redirect) {
       route.element = <Navigate to={item.redirect} />
     }

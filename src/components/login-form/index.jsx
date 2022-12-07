@@ -10,8 +10,8 @@ import eventBus from '../../event'
 const index = memo((props) => {
 
   const [formData, setFormData] = useState({
-    name: '',
-    password: ''
+    name: '15815800000',
+    password: '800000'
   })
   const changeFormData = e => {
     setFormData({
