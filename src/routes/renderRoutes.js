@@ -7,14 +7,14 @@ const renderRoutes = routes => {
       meta: item.meta,
       path: item.path
     }
+    if(item.redirect) {
+      route.element = <Navigate to={item.redirect} />
+    }
     if(item.component) {
       route.element = <RouterBeforeEach route={item}><item.component /></RouterBeforeEach>
     }
     if(item.children) {
       route.children = renderRoutes(item.children)
-    }
-    if(item.redirect) {
-      route.element = <Navigate to={item.redirect} />
     }
     return route
   })

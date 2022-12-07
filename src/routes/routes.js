@@ -1,13 +1,27 @@
 import React from 'react'
-
-const Login = React.lazy(() => import('@/pages/login/index.jsx'))
+import Login from '@/pages/login/index.jsx'
+import Layout from '@/pages/layout/index.jsx'
 const Home = React.lazy(() => import('@/pages/home/index.jsx'))
 const NotFound = React.lazy(() => import('@/pages/404NotFound/index.jsx'))
 
 const routes = [
   {
     path: '/',
+    component: Layout,
     redirect: '/home',
+    meta: {
+      isLogin: true,
+    },
+    children: [
+      {
+        path: 'home',
+        component: Home,
+        meta: {
+          title: '首页',
+          isLogin: true,
+        }
+      },
+    ]
   },
   {
     path: '/login',
@@ -15,15 +29,6 @@ const routes = [
     meta: {
       title: '登录',
     }
-  },
-  {
-    path: '/home',
-    component: Home,
-    meta: {
-      title: '首页',
-      isLogin: true,
-      isMenu: true
-    },
   },
   {
     path: '*',
