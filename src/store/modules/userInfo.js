@@ -4,8 +4,6 @@ import { encryption } from "../../util/encryption";
 import * as loginApi from '../../api/modules/login/index'
 import { getMenu } from "../../api/modules/menu";
 
-
-
 const getCodeAction = createAsyncThunk('fetch/getCode',async (extraInfo, { dispatch, getState }) => {
   const res = await loginApi.getCode()
   dispatch(setCodeInfo(res.data.data))
@@ -25,8 +23,7 @@ const loginByUsername = createAsyncThunk('fetch/getCode',async (extraInfo, { dis
 
 const getMenuAction = createAsyncThunk('fetch/getMenu', async (extraInfo, { dispatch, getState }) => {
   const res = await getMenu()
-  console.log('res', res);
-
+  dispatch(setMenu(res.data.data))
 })
 
 
@@ -39,7 +36,6 @@ const userSlice = createSlice({
     userInfo: storage.getStore({name: 'userInfo'}) || '',
     permissions: storage.getStore({name: 'permissions'}) || '',
     menu: storage.getStore({name: 'menu'}) || '',
-    menuAll: [],
     tenant_id: storage.getStore({name: 'tenant_id'}) || '',
     access_token: storage.getStore({name: 'access_token'}) || '',
     refresh_token: storage.getStore({name: 'refresh_token'}) || '',
@@ -77,6 +73,15 @@ const userSlice = createSlice({
         type: 'session'
       })
     },
+    setMenu(state, {payload}) {
+      state.menu = payload
+      storage.setStore({
+        name: 'menu',
+        content: payload,
+        type: 'session'
+      })
+    },
+
     
     logOut() {
       console.log('logout');
@@ -85,5 +90,5 @@ const userSlice = createSlice({
 })
 
 export { getCodeAction, loginByUsername, getMenuAction }
-export const { saveTenantId, logOut, setCodeInfo, setBaseInfo, setPermissions } = userSlice.actions
+export const { saveTenantId, logOut, setCodeInfo, setBaseInfo, setPermissions, setMenu } = userSlice.actions
 export default userSlice.reducer

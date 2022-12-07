@@ -30,5 +30,4 @@ const index = memo(() => {
     </Wrapper>
   )
 })
-
 export default index

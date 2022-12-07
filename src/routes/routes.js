@@ -7,8 +7,11 @@ const NotFound = React.lazy(() => import('@/pages/404NotFound/index.jsx'))
 const routes = [
   {
     path: '/',
-    component: Layout,
     redirect: '/home',
+  },
+  {
+    path: '/',
+    component: Layout,
     meta: {
       isLogin: true,
     },

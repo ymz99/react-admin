@@ -4,7 +4,6 @@ import { getMenuAction } from '../../../../store/modules/userInfo'
 import { useEffect } from 'react'
 import { useDispatch } from 'react-redux'
 
-
 const leftSlider = memo((props) => {
   const dispatch = useDispatch()
   useEffect(() => {
