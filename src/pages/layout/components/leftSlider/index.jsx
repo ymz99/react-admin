@@ -6,6 +6,7 @@ import { useDispatch } from 'react-redux'
 import Menu from '../menu/index'
 
 const leftSlider = memo((props) => {
+
   const dispatch = useDispatch()
   useEffect(() => {
     dispatch(getMenuAction())

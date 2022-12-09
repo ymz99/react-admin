@@ -23,8 +23,11 @@ const loginByUsername = createAsyncThunk('fetch/getCode',async (extraInfo, { dis
 })
 
 const getMenuAction = createAsyncThunk('fetch/getMenu', async (extraInfo, { dispatch, getState }) => {
-   await getMenu()
-  dispatch(setMenu(path))
+  await getMenu()
+  const data = getState().userInfo.menu
+  if(JSON.parse(JSON.stringify(data)) !== JSON.parse(JSON.stringify(path))){
+    dispatch(setMenu(path))
+  }
 })
 
 
