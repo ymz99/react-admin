@@ -14,14 +14,16 @@ const path = [
         label: '用户管理',
         name: '用户管理',
         path: 'user/index',
-        id: '101'
+        id: '101',
+        pid:'10'
       },
       {
         type: 1,
         label: '合作企业',
         name: '合作企业',
         path: 'firm/index',
-        id: '102'
+        id: '102',
+        pid:'10'
       }
     ]
   },
@@ -36,17 +38,21 @@ const path = [
         label: 'CSO管理',
         name: 'CSO管理',
         path: 'csoagement/index',
-        id: '201'
+        id: '201',
+        pid:'20'
       },
       {
         type: 1,
         label: '团队管理',
         name: '团队管理',
         path: 'teamagement/index',
-        id: '202'
+        id: '202',
+        pid:'20'
       }
     ]
   }
 ]
 
 export default path
+
+
