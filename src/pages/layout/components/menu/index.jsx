@@ -22,7 +22,7 @@ const mapMenu = menu => {
       if(item.children){
         item.children = formatData(item.children)
       }
-      return getItem(item.label, item.id, <AppstoreOutlined />,item.children)
+      return item.notMenu ? null : getItem(item.label, item.id, <AppstoreOutlined />,item.children)
     })
     return arr
   }
@@ -34,7 +34,6 @@ const index = memo(() => {
   const { menu } = useSelector(state => ({
     menu: state.userInfo.menu 
   }), shallowEqual)
-
 
   const [menuItem, setMenuItem] = useState([])
   const location = useLocation()
@@ -49,8 +48,10 @@ const index = memo(() => {
     setMenuItem(arr)
   }
   const curr = queryTreeBypath(menu, pathRef.current)
-  setSelectedKeys([curr.id])
-  setOpenKeys([curr.pid])
+  if(curr) {
+    setSelectedKeys([curr.id])
+    setOpenKeys([curr.pid])
+  }
   },[menu])
 
   const [selectedKeys, setSelectedKeys] = useState([])

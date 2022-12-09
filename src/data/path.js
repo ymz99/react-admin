@@ -48,6 +48,33 @@ const path = [
         path: 'teamagement/index',
         id: '202',
         pid:'20'
+      },
+      {
+        type: 0,
+        label: '三级菜单',
+        name: '三级菜单',
+        pid:'20',
+        id: '203',
+        children: [
+          {
+            type: 1,
+            label: '三级菜单A1',
+            name: '三级菜单A1',
+            path: 'teamagement/info/index',
+            id: '2031',
+            pid:'203'
+          },
+          {
+            type: 1,
+            notMenu: true,
+            label: '三级菜单A2',
+            name: '三级菜单A2',
+            path: 'teamagement/detail/:id',
+            id: '2032',
+            pid:'203'
+          },
+
+        ]
       }
     ]
   }
