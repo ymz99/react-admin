@@ -8,7 +8,6 @@ const renderRoutes = routes => {
       path: item.path
     }
     if(item.redirect) {
-      console.log('ccc');
       route.element = <Navigate to={item.redirect} />
     }
     if(item.component) {

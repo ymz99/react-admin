@@ -3,6 +3,7 @@ import storage from "../../util/storage";
 import { encryption } from "../../util/encryption";
 import * as loginApi from '../../api/modules/login/index'
 import { getMenu } from "../../api/modules/menu";
+import path from "../../data/path";
 
 const getCodeAction = createAsyncThunk('fetch/getCode',async (extraInfo, { dispatch, getState }) => {
   const res = await loginApi.getCode()
@@ -22,8 +23,8 @@ const loginByUsername = createAsyncThunk('fetch/getCode',async (extraInfo, { dis
 })
 
 const getMenuAction = createAsyncThunk('fetch/getMenu', async (extraInfo, { dispatch, getState }) => {
-  const res = await getMenu()
-  dispatch(setMenu(res.data.data))
+   await getMenu()
+  dispatch(setMenu(path))
 })
 
 

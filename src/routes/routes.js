@@ -1,8 +1,8 @@
-import React from 'react'
+// import React from 'react'
 import Login from '@/pages/login/index.jsx'
 import Layout from '@/pages/layout/index.jsx'
-const Home = React.lazy(() => import('@/pages/home/index.jsx'))
-const NotFound = React.lazy(() => import('@/pages/404NotFound/index.jsx'))
+import Home from '@/pages/home/index.jsx'
+// const Home = React.lazy(() => import('@/pages/home/index.jsx'))
 
 const routes = [
   {
@@ -35,10 +35,7 @@ const routes = [
   },
   {
     path: '*',
-    component: NotFound,
-    meta: {
-      title: '404 NOT FOUNT',
-    }
+    redirect: '/login',
   }
 ]
 

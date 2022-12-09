@@ -2,7 +2,9 @@ import React, { memo } from 'react'
 
 const index = memo(() => {
   return (
-    <div>404</div>
+    <div>
+      <h4>firm page</h4>
+    </div>
   )
 })
 
