@@ -1,9 +1,9 @@
-import React, { useState, useEffect, memo, useRef } from 'react';
+import React, { useState, memo, useRef, useLayoutEffect } from 'react';
 import { AppstoreOutlined } from '@ant-design/icons';
 import { Menu } from 'antd';
 import { useSelector, shallowEqual } from 'react-redux';
 import {  useNavigate, useLocation,  } from 'react-router-dom';
-import { queryTreeById, queryTreeBypath} from '@/util/util.js'
+import { queryTreeById, queryTreeBypath, getParentId} from '@/util/util.js'
 
 
 function getItem(label, key, icon, children, type) {
@@ -40,7 +40,7 @@ const index = memo(() => {
   const pathRef = useRef()
   pathRef.current = location.pathname
 
-  useEffect(()=>{
+  useLayoutEffect(()=>{
   if(Array.isArray(menu)) {
     const arr = mapMenu(menu)
     const rootSubmenuKeys = menu.map(item => item.id)
@@ -50,7 +50,11 @@ const index = memo(() => {
   const curr = queryTreeBypath(menu, pathRef.current)
   if(curr) {
     setSelectedKeys([curr.id])
-    setOpenKeys([curr.pid])
+    const parentId = getParentId(menu, curr.id)
+    if(parentId) {
+      parentId.shift()
+      setOpenKeys(parentId)
+    }
   }
   },[menu])
 
