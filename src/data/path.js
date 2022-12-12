@@ -69,12 +69,28 @@ const path = [
             notMenu: true,
             label: '三级菜单A2',
             name: '三级菜单A2',
-            path: 'e',
+            path: 'teamagement/detail/:id',
             id: '2032',
             pid:'203'
           },
 
         ]
+      }
+    ]
+  },
+  {
+    type: 0,
+    label: '个人中心',
+    name: '个人中心',
+    id: '30',
+    children: [
+      {
+        type: 1,
+        label: '个人中心',
+        name: '个人中心',
+        path: 'admin/index',
+        id: '301',
+        pid:'30'
       }
     ]
   }

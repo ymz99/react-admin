@@ -7,7 +7,6 @@ import storage from "../../util/storage";
 import store from "../../store";
 import { logOut } from "../../store/modules/userInfo";
 import errorCode from './errorCode'
-import { history } from "../../routes/history";
 import { notification } from 'antd';
 
 const instance = axios.create({
@@ -52,8 +51,6 @@ instance.interceptors.response.use(res => {
   const errMessage = res.data.msg || errorCode[status] || errorCode['default']
   if(status === 401) {
     store.dispatch(logOut());
-    history.replace('/login')
-    history.go()
   }
   if (status !== 200 || res.data.code === 1) {
     notification.error({

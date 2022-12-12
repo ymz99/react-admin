@@ -2,8 +2,10 @@ import styled from 'styled-components'
 
 const Left = styled.div`
   .left-top {
+    cursor: pointer;
     width: 210px;
-    padding: 10px;
+    height: 48px;
+    padding-left: 25px;
     display: flex;
     align-items: center;
     color: #fff;

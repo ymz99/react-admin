@@ -4,6 +4,7 @@ import { encryption } from "../../util/encryption";
 import * as loginApi from '../../api/modules/login/index'
 import { getMenu } from "../../api/modules/menu";
 import path from "../../data/path";
+import { history } from '@/routes/history.js'
 
 const getCodeAction = createAsyncThunk('fetch/getCode',async (extraInfo, { dispatch, getState }) => {
   const res = await loginApi.getCode()
@@ -85,10 +86,13 @@ const userSlice = createSlice({
         type: 'session'
       })
     },
-
-    
-    logOut() {
-      console.log('logout');
+  
+    logOut(state) {
+      storage.clearStore({
+        type: 'sessionStorage',
+      })
+      history.replace('/login')
+      history.go()
     } 
   }
 })

@@ -3,6 +3,7 @@ import styled from 'styled-components'
 const Header = styled.div`
   display: flex;
   position: relative;
+  justify-content: space-between;
   z-index: 99;
   .collapsed {
     display: flex;
@@ -19,6 +20,47 @@ const Header = styled.div`
     }
   }
 
+  .operate {
+    padding-right: 15px;
+    display: flex;
+    align-items: center;
+    .user-info {
+      cursor: pointer;
+      margin-right: 20px;
+      padding: 0 10px;
+      display: flex;
+      align-items: center;
+      .icon {
+        margin-right: 5px;
+        font-size: 20px;
+      }
+      &:hover {
+        background-color: #f6f6f6;
+      }
+    }
+    .setting {
+      font-size: 20px;
+      cursor: pointer;
+    }
+  }
+`
+
+export const InfoCard = styled.div`
+  p{
+    width: 90px;
+    margin: 0;
+    cursor: pointer;
+    text-align:center;
+    line-height: 22px;
+    font-size: 14px;
+    padding: 5px 0;
+    &:hover {
+      color: #ccc;
+    }
+  }
+  .login-out {
+    border-top: 1px solid #ebeef5;
+  }
 `
 
 export default Header

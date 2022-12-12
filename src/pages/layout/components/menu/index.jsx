@@ -4,6 +4,8 @@ import { Menu } from 'antd';
 import { useSelector, shallowEqual } from 'react-redux';
 import {  useNavigate, useLocation,  } from 'react-router-dom';
 import { queryTreeById, queryTreeBypath, getParentId} from '@/util/util.js'
+import { useDispatch } from 'react-redux';
+import { setCurrentPage } from '../../../../store/modules/page';
 
 
 function getItem(label, key, icon, children, type) {
@@ -15,6 +17,7 @@ function getItem(label, key, icon, children, type) {
     type,
   };
 }
+
 const mapMenu = menu => {
   const menuData = JSON.parse(JSON.stringify(menu))
   const formatData = menuData => {
@@ -31,8 +34,10 @@ const mapMenu = menu => {
 
 
 const index = memo(() => {
-  const { menu } = useSelector(state => ({
-    menu: state.userInfo.menu 
+  const dispatch = useDispatch()
+  const { menu, curr } = useSelector(state => ({
+    menu: state.userInfo.menu,
+    curr: state.page.currentPage
   }), shallowEqual)
 
   const [menuItem, setMenuItem] = useState([])
@@ -49,6 +54,7 @@ const index = memo(() => {
   }
   const curr = queryTreeBypath(menu, pathRef.current)
   if(curr) {
+    dispatch(setCurrentPage(curr.name))
     setSelectedKeys([curr.id])
     const parentId = getParentId(menu, curr.id)
     if(parentId) {
@@ -56,7 +62,7 @@ const index = memo(() => {
       setOpenKeys(parentId)
     }
   }
-  },[menu])
+  },[menu, curr, dispatch])
 
   const [selectedKeys, setSelectedKeys] = useState([])
   const [openKeys, setOpenKeys] = useState([]);
@@ -74,6 +80,7 @@ const index = memo(() => {
   const itemClick = (item) => {
     if(item.key) {
       const curr = queryTreeById(menu, item.key)
+      dispatch(setCurrentPage(curr.name))
       setSelectedKeys([item.key])
       curr && Navigate(curr.path)
     }
