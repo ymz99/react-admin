@@ -69,7 +69,7 @@ const path = [
             notMenu: true,
             label: '三级菜单A2',
             name: '三级菜单A2',
-            path: 'teamagement/detail/:id',
+            path: 'e',
             id: '2032',
             pid:'203'
           },
