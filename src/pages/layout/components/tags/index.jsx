@@ -16,7 +16,8 @@ const index = memo(() => {
     navigate(path)
   }
   const dispatch = useDispatch()
-  const closeTag = async index => { 
+  const closeTag = (e, index) => {
+    e.stopPropagation()
     let arr = [...tags]
     let length  = arr.length
     if(length === 1) {
@@ -41,9 +42,9 @@ const index = memo(() => {
         {
           tags.map((item, index)=> 
           <li className={item.name === currentTag.name ? 'active' : ''} 
-            key={item.path}>
-            <span  onClick={e => tagClick(item.path)}>{item.name}</span>
-            <CloseOutlined  className='icon'  onClick={e => closeTag(index)} />
+            key={item.path}  onClick={e => tagClick(item.path)}>
+            <span>{item.name}</span>
+            <CloseOutlined  className='icon'  onClick={e => closeTag(e, index)} />
           </li>)
         }
       </ul>
