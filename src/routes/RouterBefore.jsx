@@ -7,7 +7,6 @@ import { setCurrentPage, setTags, setCurrentTag } from "../store/modules/page";
 
 const RouterBeforeEach = props => {
   const title = props?.route?.meta?.title
-  console.log('RouterBeforeEach render');
   if(title) {
     document.title = props.route.meta.title
   }
@@ -19,6 +18,8 @@ const RouterBeforeEach = props => {
   const isLogin = !!storage.getStore({name: 'access_token'})
 
   useEffect(() => {
+
+    if(location.pathname === '/login') return
     if(isLogin && title) {
       dispatch(setCurrentPage(title))
       const obj = {

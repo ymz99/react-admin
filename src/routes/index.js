@@ -6,7 +6,6 @@ import formatRoute from './formatRoute'
 import { useCallback } from "react";
 
 const Router = () => {
-  console.log('Router');
   const {menu} = useSelector(state => ({
     menu: state.userInfo.menu
   }), shallowEqual)
