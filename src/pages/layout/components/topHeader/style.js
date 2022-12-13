@@ -1,6 +1,7 @@
 import styled from 'styled-components'
 
 const Header = styled.div`
+  border-bottom: 1px solid #f6f6f6;
   display: flex;
   position: relative;
   justify-content: space-between;

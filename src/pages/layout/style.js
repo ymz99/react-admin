@@ -13,11 +13,14 @@ import styled from 'styled-components'
       padding: 0;
       height: 48px;
       line-height: 48px;
-      border-bottom: 1px solid #f6f6f6;
     }
-    .top-header, .content {
+    .top-header, .info-content {
       background: #fff;
       color: #000;
+    }
+
+    .info-content{
+      margin: 10px;
     }
   }
   

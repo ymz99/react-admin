@@ -6,7 +6,6 @@ import { Drawer, Popover } from 'antd';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import Header,{ InfoCard } from './style';
-import { setCurrentPage } from '../../../../store/modules/page';
 import { logOut } from '../../../../store/modules/userInfo';
 
 
@@ -18,9 +17,6 @@ const topHeader = memo((props) => {
     userInfo: state.userInfo.userInfo
   }))
   
-
-
-
   const Navigate = useNavigate()
   const dispatch = useDispatch()
   const infoCardClick = type => {
@@ -28,7 +24,6 @@ const topHeader = memo((props) => {
       window.open('https://github.com/ymz99/react-admin.git', '_blank');
     }else if(type === 1) {
       Navigate('/admin/index')
-      dispatch(setCurrentPage('个人中心'))
     }else if(type === 2){
       dispatch(logOut())
     } 

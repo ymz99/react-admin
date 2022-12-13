@@ -5,7 +5,7 @@ import { useEffect } from 'react'
 import { useDispatch } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 import Menu from '../menu/index'
-import { setCurrentPage } from '../../../../store/modules/page'
+
 
 const leftSlider = memo((props) => {
 
@@ -17,7 +17,6 @@ const leftSlider = memo((props) => {
 
   const goHome = () => {
     navigate('/home')
-    dispatch(setCurrentPage('首页'))
   }
   const { collapsed } = props
   return (

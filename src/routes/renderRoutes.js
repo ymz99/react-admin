@@ -3,6 +3,7 @@ import RouterBeforeEach from "./RouterBefore";
 import { Suspense } from 'react'
 import Fallback from "../components/fallback/index";
 
+
 const renderRoutes = routes => {
   const fun = routes => {
     return routes.map(item => {

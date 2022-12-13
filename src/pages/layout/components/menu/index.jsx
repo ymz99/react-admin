@@ -80,7 +80,6 @@ const index = memo(() => {
   const itemClick = (item) => {
     if(item.key) {
       const curr = queryTreeById(menu, item.key)
-      dispatch(setCurrentPage(curr.name))
       setSelectedKeys([item.key])
       curr && Navigate(curr.path)
     }

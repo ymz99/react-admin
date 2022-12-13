@@ -3,10 +3,11 @@ import { Layout } from 'antd';
 import Wrapper from './style';
 import LeftSlider from './components/leftSlider/index.jsx';
 import TopHeader from './components/topHeader';
+import Tags from './components/tags'
 import { Outlet } from 'react-router-dom';
 
-const index = memo(() => {
 
+const index = memo(() => {
   const { Header, Sider, Content } = Layout;
   const [collapsed, setCollapsed] = useState(false)  
   const setCollapsedClick = () => {
@@ -22,7 +23,8 @@ const index = memo(() => {
           <Header className='top-header'>
             <TopHeader collapsed={collapsed} setCollapsed={setCollapsedClick} />
           </Header>
-          <Content className='content'>
+          <Tags />
+          <Content className='info-content'>
             <Outlet />
           </Content>
         </Layout>
