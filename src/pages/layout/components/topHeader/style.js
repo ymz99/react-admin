@@ -25,6 +25,23 @@ const Header = styled.div`
     padding-right: 15px;
     display: flex;
     align-items: center;
+
+    .full-screen {
+      margin-right: 20px;
+      .full-screen-icon {
+        font-size: 18px;
+        cursor: pointer;
+      }
+    }
+    
+    .message {
+      margin-right: 20px;
+      .message-icon {
+        font-size: 18px;
+        cursor: pointer;
+      }
+    }
+
     .user-info {
       cursor: pointer;
       margin-right: 20px;

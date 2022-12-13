@@ -23,7 +23,7 @@ const leftSlider = memo((props) => {
     <Left collapsed={collapsed}>
       <div className='left-top' onClick={goHome}>
         <img src={require("@/static/img/common/logo.png")} className="logo" alt="" />
-        <p>要易业务管理平台</p>
+        <p>xx业务管理平台</p>
       </div>
       <div className='menu'>
         <Menu />

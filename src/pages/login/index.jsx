@@ -46,7 +46,7 @@ const index = memo(() => {
             <img src={require('@/static/img/login/logo.jpg')} alt="" />
           </div>
           <div className='title'>
-            <h3>要易业务管理平台</h3>
+            <h3>xx业务管理平台</h3>
           </div>
           <div className='form'>
             <LoginForm loginClick={ loginClick } />

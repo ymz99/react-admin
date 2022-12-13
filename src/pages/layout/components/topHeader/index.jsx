@@ -1,12 +1,13 @@
-import React, { memo, useState } from 'react'
+import React, { memo, useState, useEffect, } from 'react'
 import PropTypes from 'prop-types'
-import { MenuUnfoldOutlined , MenuFoldOutlined, UserOutlined, SettingOutlined } from '@ant-design/icons';
+import { MenuUnfoldOutlined , MenuFoldOutlined, UserOutlined, SettingOutlined, MessageOutlined,FullscreenOutlined, FullscreenExitOutlined } from '@ant-design/icons';
 import { useSelector } from 'react-redux';
-import { Drawer, Popover } from 'antd';
+import { Drawer, Popover, Tabs } from 'antd';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import Header,{ InfoCard } from './style';
 import { logOut } from '../../../../store/modules/userInfo';
+import { Badge } from 'antd';
 
 
 const topHeader = memo((props) => {
@@ -16,7 +17,40 @@ const topHeader = memo((props) => {
     name: state.page.currentPage,
     userInfo: state.userInfo.userInfo
   }))
-  
+
+  const [fullScreen, setFullScreen] = useState(false)
+  useEffect(() =>{
+    const fun = () => {
+      setFullScreen(!fullScreen)
+    }
+    document.addEventListener(
+      "fullscreenchange", fun, false
+    );
+    return () => {
+      document.removeEventListener("webkitfullscreenchange", fun,)
+    }
+  }, [fullScreen, setFullScreen])
+
+  const requestFullScreen = () => {
+    const doc =  document.documentElement;
+    if(doc.requestFullscreen) {
+      doc.requestFullscreen()
+    }else if(doc.mozRequestFullScreen) {
+      doc.mozRequestFullScreen();
+    }else if(doc.webkitRequestFullScreen) {
+      doc.webkitRequestFullScreen()
+    }
+  };
+  const exitFullscreen = () => {
+    const doc =  document.documentElement;
+    if(doc.exitFullscreen) {
+      doc.exitFullscreen();
+    }else if(doc.mozCancelFullScreen) {
+      doc.mozCancelFullScreen()
+    }else if(doc.webkitCancelFullScreen) {
+      doc.webkitCancelFullScreen()
+    }
+  }
   const Navigate = useNavigate()
   const dispatch = useDispatch()
   const infoCardClick = type => {
@@ -40,6 +74,33 @@ const topHeader = memo((props) => {
       </div>
     </InfoCard>
   );
+
+  const onChange = (key) => {
+    console.log(key);
+  };
+  const messageCard = (
+    <Tabs
+    defaultActiveKey="1"
+    onChange={onChange}
+    items={[
+      {
+        label: `通知（10）`,
+        key: '1',
+        children: `Content of Tab Pane 1`,
+      },
+      {
+        label: `消息（20）`,
+        key: '2',
+        children: `Content of Tab Pane 2`,
+      },
+      {
+        label: `代办（30）`,
+        key: '3',
+        children: `Content of Tab Pane 3`,
+      },
+    ]}
+  />
+  );
   return (
     <Header>
       <div className='collapsed'>
@@ -55,6 +116,18 @@ const topHeader = memo((props) => {
         <span>{name}</span>
       </div>
       <div className='operate'>
+        <div className='full-screen'>
+          {
+            fullScreen ? <FullscreenExitOutlined onClick={exitFullscreen} className='full-screen-icon' /> : <FullscreenOutlined onClick={requestFullScreen} className='full-screen-icon' />
+          }
+        </div>
+        <div className='message'>
+          <Badge dot>
+            <Popover content={messageCard}>
+              <MessageOutlined className='message-icon' />
+            </Popover>
+          </Badge>  
+        </div>
         <div className='user-info'>
           <Popover content={content} trigger="hover" placement="bottom">
             <UserOutlined className='icon' />
