@@ -61,6 +61,9 @@ const index = memo(() => {
       parentId.shift()
       setOpenKeys(parentId)
     }
+  }else {
+    setSelectedKeys([])
+    setOpenKeys([])
   }
   },[menu, curr, dispatch])
 
