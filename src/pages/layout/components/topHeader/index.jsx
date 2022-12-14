@@ -30,27 +30,14 @@ const topHeader = memo((props) => {
       document.removeEventListener("webkitfullscreenchange", fun,)
     }
   }, [fullScreen, setFullScreen])
-
-  const requestFullScreen = () => {
-    const doc =  document.documentElement;
-    if(doc.requestFullscreen) {
-      doc.requestFullscreen()
-    }else if(doc.mozRequestFullScreen) {
-      doc.mozRequestFullScreen();
-    }else if(doc.webkitRequestFullScreen) {
-      doc.webkitRequestFullScreen()
-    }
-  };
-  const exitFullscreen = () => {
-    const doc =  document.documentElement;
-    if(doc.exitFullscreen) {
-      doc.exitFullscreen();
-    }else if(doc.mozCancelFullScreen) {
-      doc.mozCancelFullScreen()
-    }else if(doc.webkitCancelFullScreen) {
-      doc.webkitCancelFullScreen()
+  const fullScreenClick = () => {
+    if (document.fullscreenElement) {
+      document.exitFullscreen()
+    } else {
+      document.documentElement.requestFullscreen()
     }
   }
+
   const Navigate = useNavigate()
   const dispatch = useDispatch()
   const infoCardClick = type => {
@@ -118,7 +105,13 @@ const topHeader = memo((props) => {
       <div className='operate'>
         <div className='full-screen'>
           {
-            fullScreen ? <FullscreenExitOutlined onClick={exitFullscreen} className='full-screen-icon' /> : <FullscreenOutlined onClick={requestFullScreen} className='full-screen-icon' />
+            React.createElement(
+              fullScreen ? FullscreenExitOutlined : FullscreenOutlined,
+             {
+              className: 'full-screen-icon',
+              onClick: fullScreenClick
+             }
+            )
           }
         </div>
         <div className='message'>
